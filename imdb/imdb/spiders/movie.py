@@ -13,6 +13,11 @@ class MovieSpider(scrapy.Spider):
         for subject in titles:
             yield {
                 'Title': subject.xpath('.//h3[@class="lister-item-header"]/a/text()').extract_first(),
+                'Runtime': subject.xpath('.//span[@class="runtime"]/text()').extract_first(),
+                'Description': subject.xpath('.//p[@class="text-muted"]/text()').extract_first(),
+                'Director': subject.xpath('.//p[contains(text(),"Director")]/a[1]/text()').extract_first(),
+                'Gross Revenue': subject.xpath('.//span[@name="nv" and contains(text(), "$")]/text()').extract_first(),
+                'Rating': subject.xpath('.//div[@class="inline-block ratings-imdb-rating"]/strong/text()').extract_first(),
             }
 
 
